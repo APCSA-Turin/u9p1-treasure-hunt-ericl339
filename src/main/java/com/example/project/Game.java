@@ -1,5 +1,6 @@
 package com.example.project;
 import java.util.Scanner;
+import java.util.*;
 
 public class Game{
     // creates the variable
@@ -65,6 +66,194 @@ public class Game{
             }
             // else continue
             else {
+                // EXTRA CREDIT 
+                // creates a way variable to determine if enemies will move horizontally or vertically. sets it to 0 or 1
+                int way = (int)(Math.random() * (1 - 0 + 1)) + 0;
+                // if horizontally
+                if (way == 0 ){
+                    // if the enemy isnt on the same x as player then run
+                    if (!(enemies[0].getX() == player.getX())) {
+                        // if enemy is farther right than player run
+                        if (enemies[0].getX() > player.getX()) {
+                            // checks for collision and makes sure not to bump into them
+                            if (!(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() - 1] instanceof Treasure && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() - 1] instanceof Trophy)) && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() - 1] instanceof Trophy) && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() - 1] instanceof Enemy)) {
+                                // moves the enemy to the left
+                                enemies[0].move("a");
+                                grid.placeSprite(enemies[0],"a");
+                            }
+                        }
+                        // if the enemy is farther left than the player run
+                        else {
+                            // checks for collision and makes sure not to bump into them
+                            if (!(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() + 1] instanceof Treasure && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() + 1] instanceof Trophy)) && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() + 1] instanceof Trophy) && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() + 1] instanceof Enemy)) {
+                                // moves the enemy to the right
+                                enemies[0].move("d");
+                                grid.placeSprite(enemies[0],"d");
+                            }   
+                        }
+                    }
+                    // if the enemy is on the same x, then move vertically. checks also if the enemy is on the same y value
+                    else if (!(enemies[0].getY() == player.getY())){
+                        // if the enemy is further up then run
+                        if (enemies[0].getY() > player.getY()) {
+                            // checks for collision so that it doesnt replace any sprite
+                            if (!(grid.getGrid()[size - enemies[0].getY() - 1 + 1][enemies[0].getX()] instanceof Treasure && !(grid.getGrid()[size - enemies[0].getY() - 1 + 1][enemies[0].getX()] instanceof Trophy)) && !(grid.getGrid()[size - enemies[0].getY() - 1 + 1][enemies[0].getX()] instanceof Trophy) && !(grid.getGrid()[size - enemies[0].getY() - 1 + 1][enemies[0].getX()] instanceof Enemy)) {
+                                // moves the enemy down
+                                enemies[0].move("s");
+                                grid.placeSprite(enemies[0],"s");
+                            }
+                        }
+                        // if the enemy is lower than player
+                        else {
+                            // checks for collision
+                            if (!(grid.getGrid()[size - enemies[0].getY() - 1 - 1][enemies[0].getX()] instanceof Treasure && !(grid.getGrid()[size - enemies[0].getY() - 1 - 1][enemies[0].getX()] instanceof Trophy)) && !(grid.getGrid()[size - enemies[0].getY() - 1 - 1][enemies[0].getX()] instanceof Trophy) && !(grid.getGrid()[size - enemies[0].getY() - 1 - 1][enemies[0].getX()] instanceof Enemy)) {
+                                // moves the enemy up
+                                enemies[0].move("w");
+                                grid.placeSprite(enemies[0],"w");
+                            }   
+                        }
+                    }
+                }
+                // runs if vertically comes first
+                else if (way == 1){
+                    // runs if the enemy isnt on the same y axis
+                    if (!(enemies[0].getY() == player.getY())){
+                        // runs if the enemy is higher than player
+                        if (enemies[0].getY() > player.getY()) {
+                            // checks collisions
+                            if (!(grid.getGrid()[size - enemies[0].getY() - 1 + 1][enemies[0].getX()] instanceof Treasure && !(grid.getGrid()[size - enemies[0].getY() - 1 + 1][enemies[0].getX()] instanceof Trophy)) && !(grid.getGrid()[size - enemies[0].getY() - 1 + 1][enemies[0].getX()] instanceof Trophy) && !(grid.getGrid()[size - enemies[0].getY() - 1 + 1][enemies[0].getX()] instanceof Enemy)) {
+                                // moves the enemy down
+                                enemies[0].move("s");
+                                grid.placeSprite(enemies[0],"s");
+                            }
+                        }
+                        // runs if the enemy is lower than player
+                        else {
+                            // checks for collision
+                            if (!(grid.getGrid()[size - enemies[0].getY() - 1 - 1][enemies[0].getX()] instanceof Treasure && !(grid.getGrid()[size - enemies[0].getY() - 1 - 1][enemies[0].getX()] instanceof Trophy)) && !(grid.getGrid()[size - enemies[0].getY() - 1 - 1][enemies[0].getX()] instanceof Trophy) && !(grid.getGrid()[size - enemies[0].getY() - 1 - 1][enemies[0].getX()] instanceof Enemy)) {
+                                // moves the enemy up
+                                enemies[0].move("w");
+                                grid.placeSprite(enemies[0],"w");
+                            }   
+                        }
+                    }
+                    // runs if the enemy is on the same y axis as player
+                    else if (!(enemies[0].getX() == player.getX())) {
+                        // runs if the enemy is to the right
+                        if (enemies[0].getX() > player.getX()) {
+                            // checks collision
+                            if (!(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() - 1] instanceof Treasure && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() - 1] instanceof Trophy)) && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() - 1] instanceof Trophy) && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() - 1] instanceof Enemy)) {
+                                // moves the enemy to the left
+                                enemies[0].move("a");
+                                grid.placeSprite(enemies[0],"a");
+                            }
+                        }
+                        // runs if the enemy is to the left
+                        else {
+                            // checks collision
+                            if (!(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() + 1] instanceof Treasure && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() + 1] instanceof Trophy)) && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() + 1] instanceof Trophy) && !(grid.getGrid()[size - enemies[0].getY() - 1][enemies[0].getX() + 1] instanceof Enemy)) {
+                                // moves the enemy to the right
+                                enemies[0].move("d");
+                                grid.placeSprite(enemies[0],"d");
+                            }   
+                        }
+                    }
+                }
+
+                // makes another random seletor for the second enemy
+                int way2 = (int)(Math.random() * (1 - 0 + 1)) + 0;
+                // runs if horizontal is first
+                if (way2 == 0 ){
+                    // checks if the enemy is not on the same x axis
+                    if (!(enemies[1].getX() == player.getX())) {
+                        // runs if the enemy is to the right
+                        if (enemies[1].getX() > player.getX()) {
+                            // checks collision
+                            if (!(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() - 1] instanceof Treasure && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() - 1] instanceof Trophy)) && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() - 1] instanceof Trophy) && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() - 1] instanceof Enemy)) {
+                                // moves the enemy to the left
+                                enemies[1].move("a");
+                                grid.placeSprite(enemies[1],"a");
+                            }
+                        }
+                        // runs if the enemy is to the left
+                        else {
+                            // checks collision
+                            if (!(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() + 1] instanceof Treasure && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() + 1] instanceof Trophy)) && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() + 1] instanceof Trophy) && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() + 1] instanceof Enemy)) {
+                                // runs the enemy to the right
+                                enemies[1].move("d");
+                                grid.placeSprite(enemies[1],"d");
+                            }   
+                        }
+                    }
+                    // runs if the enemy is on the same x axis
+                    else if (!(enemies[1].getY() == player.getY())){
+                        // runs if the enemy is higher
+                        if (enemies[1].getY() > player.getY()) {
+                            // checks collision
+                            if (!(grid.getGrid()[size - enemies[1].getY() - 1 + 1][enemies[1].getX()] instanceof Treasure && !(grid.getGrid()[size - enemies[1].getY() - 1 + 1][enemies[1].getX()] instanceof Trophy)) && !(grid.getGrid()[size - enemies[1].getY() - 1 + 1][enemies[1].getX()] instanceof Trophy) && !(grid.getGrid()[size - enemies[1].getY() - 1 + 1][enemies[1].getX()] instanceof Enemy)) {
+                                // moves the enemy down
+                                enemies[1].move("s");
+                                grid.placeSprite(enemies[1],"s");
+                            }
+                        }
+                        // runs if the enemy is lower
+                        else {
+                            // checks collision
+                            if (!(grid.getGrid()[size - enemies[1].getY() - 1 - 1][enemies[1].getX()] instanceof Treasure && !(grid.getGrid()[size - enemies[1].getY() - 1 - 1][enemies[1].getX()] instanceof Trophy)) && !(grid.getGrid()[size - enemies[1].getY() - 1 - 1][enemies[1].getX()] instanceof Trophy) && !(grid.getGrid()[size - enemies[1].getY() - 1 - 1][enemies[1].getX()] instanceof Enemy)) {
+                                // moves the enemy up
+                                enemies[1].move("w");
+                                grid.placeSprite(enemies[1],"w");
+                            }   
+                        }
+                    }
+                }
+                // runs for verticle first
+                else if (way == 1){
+                    // checks if the enemy is not on the same y axis
+                    if (!(enemies[1].getY() == player.getY())){
+                        // runs if enemy is higher
+                        if (enemies[1].getY() > player.getY()) {
+                            // checks collision
+                            if (!(grid.getGrid()[size - enemies[1].getY() - 1 + 1][enemies[1].getX()] instanceof Treasure && !(grid.getGrid()[size - enemies[1].getY() - 1 + 1][enemies[1].getX()] instanceof Trophy)) && !(grid.getGrid()[size - enemies[1].getY() - 1 + 1][enemies[1].getX()] instanceof Trophy) && !(grid.getGrid()[size - enemies[1].getY() - 1 + 1][enemies[1].getX()] instanceof Enemy)) {
+                                // moves enemy down
+                                enemies[1].move("s");
+                                grid.placeSprite(enemies[1],"s");
+                            }
+                        }
+                        // runs if enemy is lower
+                        else {
+                            // checks collision
+                            if (!(grid.getGrid()[size - enemies[1].getY() - 1 - 1][enemies[1].getX()] instanceof Treasure && !(grid.getGrid()[size - enemies[1].getY() - 1 - 1][enemies[1].getX()] instanceof Trophy)) && !(grid.getGrid()[size - enemies[1].getY() - 1 - 1][enemies[1].getX()] instanceof Trophy) && !(grid.getGrid()[size - enemies[1].getY() - 1 - 1][enemies[1].getX()] instanceof Enemy)) {
+                                // moves enemy up
+                                enemies[1].move("w");
+                                grid.placeSprite(enemies[1],"w");
+                            }   
+                        }
+                    }
+                    // runs if the enemy is on the same y axis
+                    else if (!(enemies[1].getX() == player.getX())) {
+                        // runs if the enemy is to the right
+                        if (enemies[1].getX() > player.getX()) {
+                            // checks collsion
+                            if (!(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() - 1] instanceof Treasure && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() - 1] instanceof Trophy)) && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() - 1] instanceof Trophy) && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() - 1] instanceof Enemy)) {
+                                // moves the enemy to the left
+                                enemies[1].move("a");
+                                grid.placeSprite(enemies[1],"a");
+                            }
+                        }
+                        // runs if the enemy is to the left
+                        else {
+                            // checks collision
+                            if (!(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() + 1] instanceof Treasure && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() + 1] instanceof Trophy)) && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() + 1] instanceof Trophy) && !(grid.getGrid()[size - enemies[1].getY() - 1][enemies[1].getX() + 1] instanceof Enemy)) {
+                                // moves the enemy to the right
+                                enemies[1].move("d");
+                                grid.placeSprite(enemies[1],"d");
+                            }   
+                        }
+                    }
+                }
+
+
                 // checks to see if the direction is a valid direction
                 if (player.isValid(size, direction)) {
                     // creates a go boolean to allow the player to move
